@@ -1,8 +1,30 @@
 <html>
   <head>
     <link rel="import" href="../corespring-feedback.html" />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.querySelector('#add').addEventListener('click', function(){
+          var node = document.createElement('corespring-feedback');
+          node.setAttribute('correctness', 'correct');
+          node.textContent = 'hi';
+          document.body.appendChild(node);
+          node.addEventListener('click', function(){
+            console.log(this);
+            document.body.removeChild(this);
+          });
+        });
+
+      });
+
+    </script>
+
   </head>
   <body>
-    <corespring-feedback>This is some feedback</corespring-feedback>
+    <button id="add">Add</button>
+    <button id="remove">Remove</button>
+
+    <corespring-feedback class="correct" correctness="correct">This is some feedback</corespring-feedback>
+    <!--<corespring-feedback correctness="incorrect">This is some feedback</corespring-feedback>-->
   </body>
 </html>

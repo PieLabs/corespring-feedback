@@ -1,11 +1,12 @@
 {
   "name": "corespring-feedback",
   "version": "1.0.0",
-  "main" : "corespring-feedback.html",
+  "main": "corespring-feedback.html",
   "dependencies": {
     "paper-elements": "PolymerElements/paper-elements#^1.0.7",
     "polymer": "^1.6.0",
-    "paper-styles": "PolymerElements/paper-styles#^1.1.4"
+    "paper-styles": "PolymerElements/paper-styles#^1.1.4",
+    "neon-animation": "PolymerElements/neon-animation#^1.2.4"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
