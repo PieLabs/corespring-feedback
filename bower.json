@@ -1,0 +1,17 @@
+{
+  "name": "corespring-feedback",
+  "version": "1.0.0",
+  "main" : "corespring-feedback.html",
+  "dependencies": {
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "polymer": "^1.6.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}

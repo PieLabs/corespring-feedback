@@ -1,0 +1,64 @@
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../neon-animation/animations/slide-from-left-animation.html">
+<link rel="import" href="../neon-animation/animations/slide-left-animation.html">
+<link rel="import" href="../neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../neon-animation/animations/fade-out-animation.html">
+<!--
+`corespring-feedback` just shows some feedback 
+
+It's a low level component for use in other components.
+
+Example:
+
+    <corespring-feedback correctness="true">This is the message</corespring-feedback>
+
+### Styling
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--feedback-height` | the height of the button | `25px`
+`--feedback-show-icon-background` | the show icon background color | `white`
+`--feedback-hide-icon-background` | the hide icon background color | `#bce2ff`
+`--feedback-border` | the border | `#bce2ff`
+`--feedback-icon-foreground` | the icon foreground color | `#1a9cff`
+@element corespring-feedback
+@demo demo/index.html
+-->
+
+<dom-module id="corespring-feedback">
+  <template>
+    <style>
+      :host{
+        display: block;
+        width: 200px;
+        height: var(--feedback-height, 25px);
+        cursor: pointer;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none;   /* Chrome/Safari/Opera */
+        -khtml-user-select: none;    /* Konqueror */
+        -moz-user-select: none;      /* Firefox */
+        -ms-user-select: none;       /* Internet Explorer/Edge */
+        user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+      }
+
+
+    </style>
+    {{message}}
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'corespring-feedback', 
+    behaviors: [
+      Polymer.NeonAnimationRunnerBehavior
+    ],
+    properties: {
+      message: {type:String, value: ''},
+    }
+  });
+</script>
+
