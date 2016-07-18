@@ -4,15 +4,13 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function(){
-        document.querySelector('#add').addEventListener('click', function(){
-          var node = document.createElement('corespring-feedback');
-          node.setAttribute('correctness', 'correct');
-          node.textContent = 'hi';
-          document.body.appendChild(node);
-          node.addEventListener('click', function(){
-            console.log(this);
-            document.body.removeChild(this);
-          });
+        document.querySelector('#show').addEventListener('click', function(){
+          var node = document.querySelector('corespring-feedback');
+          node.show();
+        });
+        document.querySelector('#hide').addEventListener('click', function(){
+          var node = document.querySelector('corespring-feedback');
+          node.hide();
         });
 
       });
@@ -21,10 +19,11 @@
 
   </head>
   <body>
-    <button id="add">Add</button>
-    <button id="remove">Remove</button>
-
+    <button id="show">Show</button>
+    <button id="hide">Hide</button>
+    <div>This is a line</div>
     <corespring-feedback class="correct" correctness="correct">This is some feedback</corespring-feedback>
+    <div>This is a line</div>
     <!--<corespring-feedback correctness="incorrect">This is some feedback</corespring-feedback>-->
   </body>
 </html>

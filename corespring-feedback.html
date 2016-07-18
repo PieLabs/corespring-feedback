@@ -3,9 +3,12 @@
 <link rel="import" href="../neon-animation/neon-animatable.html">
 <link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../neon-animation/animations/scale-down-animation.html">
 <link rel="import" href="../neon-animation/animations/fade-out-animation.html">
 <link rel="import" href="../neon-animation/animations/fade-in-animation.html">
 <link rel="import" href="../neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="./cs-grow-height-animation.html">
+<link rel="import" href="./cs-shrink-height-animation.html">
 <!--
 `corespring-feedback` just shows some feedback 
 
@@ -20,7 +23,7 @@ The following custom properties and mixins are available for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--feedback-height` | the height of the button | `25px`
+`--feedback-height` | the height of the button | `35px`
 `--feedback-show-icon-background` | the show icon background color | `white`
 `--feedback-hide-icon-background` | the hide icon background color | `#bce2ff`
 `--feedback-border` | the border | `#bce2ff`
@@ -36,14 +39,16 @@ Custom property | Description | Default
         @apply(--paper-font-common-base); 
         display: block;
         border-radius: 6px;
-        padding-top: 6px;
+        /*padding-top: 6px;
         padding-bottom: 6px;
         padding-left: 11px;
-        padding-right: 11px;
+        padding-right: 11px;*/
+        padding: 0px;
+        margin: 0px; 
         font-size: var(--feedback-font-size, 12px);
         line-height: var(--feedback-font-size, 25px);
         vertical-align: middle;
-        margin-top: 10px;
+        /*margin-top: 10px;*/
         height: var(--feedback-height, 25px);
         -webkit-touch-callout: none; /* iOS Safari */
         -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -63,8 +68,14 @@ Custom property | Description | Default
         color: var(--feedback-incorrect-label-color, #946202);
       }
 
+      .holder{
+        padding: 10px;
+      }
+
     </style>
-      <content></content>
+      <div class="holder">
+        <content></content>
+      </div>
   </template>
 </dom-module>
 
@@ -75,34 +86,82 @@ Custom property | Description | Default
       Polymer.NeonAnimationRunnerBehavior,
       Polymer.NeonAnimatableBehavior
     ],
+    
     listeners: {
       'neon-animation-finish': '_onNeonAnimationFinish'
     },
     ready: function(){
       this.playAnimation('entry');
     },
-    detached: function(){
-      console.log('detached');
-      this.playAnimation('exit');
+    attached: function(){
+      if(!this._isVisible){
+        this.style.height = '0';
+      } else {
+        this.style.height = '45px';
+      }
     },
     _onNeonAnimationFinish: function() {
       console.log('done...');
+      if(!this._isVisible){
+        this.style.opacity = 0;
+        this.style.height = '0';
+      }else {
+        this.style.opacity = 1.0;
+        this.style.height = '45px';
+      }
+    },
+    show: function(){
+      if(this._isVisible){
+        return;
+      }
+      this._isVisible = true;
+      this.playAnimation('show');
+    },
+    hide: function(){
+      if(!this._isVisible){
+        return;
+      }
+      this._isVisible = false;
+      this.playAnimation('hide');
     },
     properties: {
+      _isVisible: {type:Boolean, value: false},
       animationConfig: {
         value: function() {
           return {
-            'entry': {
+            'show': [
+                {
+                name: 'scale-up-animation',
+                axis: 'y',
+                transformOrigin: '0% 0',
+                node: this
+              }, {
+              name: 'cs-grow-height-animation',
+              node: this,
+              height: '45px'
+            },{
               // provided by neon-animation/animations/scale-up-animation.html
               // name: 'scale-up-animation',
               name: 'fade-in-animation',
               node: this
+            }],
+            'hide': [
+                {
+                name: 'scale-down-animation',
+                axis: 'y',
+                transformOrigin: '0% 0',
+                node: this
+              }, {
+              name: 'cs-shrink-height-animation',
+              node: this,
+              height: '0px'
             },
-            'exit': {
+              {
               // provided by neon-animation/animations/fade-out-animation.html
               name: 'fade-out-animation',
               node: this
-            }
+            },
+            ]
           }
         }
       }
