@@ -1,7 +1,11 @@
 {
   "name": "corespring-feedback",
   "version": "1.0.0",
-  "main": "corespring-feedback.html",
+  "main": [
+    "corespring-feedback.html",
+    "cs-grow-height-animation.html",
+    "cs-shrink-height-animation.html"
+  ],
   "dependencies": {
     "paper-elements": "PolymerElements/paper-elements#^1.0.7",
     "polymer": "^1.6.0",
